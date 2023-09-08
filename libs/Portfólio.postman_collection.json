@@ -1,0 +1,997 @@
+{
+	"info": {
+		"_postman_id": "408a76c5-463e-4bc1-a90c-719137cdaa46",
+		"name": "Portfólio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21685980"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"item": [
+						{
+							"name": "admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json();",
+											"pm.environment.set(\"access_token\", data.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json();",
+											"pm.environment.set(\"access_token\", data.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"sabordoce@cantina.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "client",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = pm.response.json();",
+											"pm.environment.set(\"access_token\", data.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phone\": \"(14) 12345-6789\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/client/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"client",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.environment.set(\"access_token\", data.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "store",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Vinícius",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "vinicius@teste.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Vinicius",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "vinicius@aaa.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/user/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/user/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "academic",
+			"item": [
+				{
+					"name": "store",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "SOSCantinas",
+									"description": "required | min:3 | max:50",
+									"type": "default"
+								},
+								{
+									"key": "semester",
+									"value": "one",
+									"description": "required | ['one', 'two', 'three', 'four', 'five', 'six']",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "https://www.placemonkeys.com/500/350",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Um texto bem legal aqui",
+									"description": "sometimes",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/academic/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"academic",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/academic",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"academic"
+							],
+							"query": [
+								{
+									"key": "hidden",
+									"value": "0",
+									"description": "'1' | '0'",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/academic/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"academic",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "SOSCantinas",
+									"description": "required | min:3 | max:50",
+									"type": "default"
+								},
+								{
+									"key": "semester",
+									"value": "one",
+									"description": "required | ['one', 'two', 'three', 'four', 'five', 'six']",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"value": "https://www.placemonkeys.com/500/350",
+									"description": "required",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "Um texto bem legal aqui",
+									"description": "sometimes",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/academic/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"academic",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/academic/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"academic",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "portfolio",
+			"item": [
+				{
+					"name": "store",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "SOSCantinas",
+									"description": "required | min:3 | max:50",
+									"type": "default"
+								},
+								{
+									"key": "type",
+									"value": "web",
+									"description": "required | ['design', 'prototype', 'web', 'mobile']",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"value": "https://www.placemonkeys.com/500/350",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "deploy",
+									"value": "https://www.viniciuslimaan.com/soscantinas",
+									"description": "sometimes | max:100",
+									"type": "text"
+								},
+								{
+									"key": "giuthub",
+									"value": "https://www.github.com/viniciuslimaan/soscantinas",
+									"description": "sometimes | max:100",
+									"type": "text"
+								},
+								{
+									"key": "figma",
+									"value": "https://www.figma.com/viniciuslimaan/soscantinas",
+									"description": "sometimes | max:100",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/portfolio/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"portfolio",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/portfolio",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"portfolio"
+							],
+							"query": [
+								{
+									"key": "hidden",
+									"value": "0",
+									"description": "'1' | '0'",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/portfolio/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"portfolio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "SOSCantinas",
+									"description": "required | min:3 | max:50",
+									"type": "default"
+								},
+								{
+									"key": "type",
+									"value": "web",
+									"description": "required | ['design', 'prototype', 'web', 'mobile']",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"value": "https://www.placemonkeys.com/500/350",
+									"description": "required",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "deploy",
+									"value": "https://www.viniciuslimaan.com/soscantinas",
+									"description": "sometimes | max:100",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "giuthub",
+									"value": "https://www.github.com/viniciuslimaan/soscantinas",
+									"description": "sometimes | max:100",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "figma",
+									"value": "https://www.figma.com/viniciuslimaan/soscantinas",
+									"description": "sometimes | max:100",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/portfolio/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"portfolio",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/portfolio/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"portfolio",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
