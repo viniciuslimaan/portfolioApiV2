@@ -13,9 +13,9 @@ Repositório da API do meu portfólio.
 Para visualizar em seu computador use:
 
 ```
-git clone https://github.com/viniciuslimaan/portfolioApi.git
+git clone https://github.com/viniciuslimaan/portfolioApiV2.git
 
-cd portfolioApi
+cd portfolioApiV2
 
 composer i
 
