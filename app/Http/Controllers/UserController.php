@@ -12,10 +12,10 @@ class UserController extends Controller
     /**
      * Authenticate route
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth.routes:user');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth.routes:api');
+    }
 
     /**
      * Show all users

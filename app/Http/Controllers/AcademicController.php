@@ -12,10 +12,10 @@ class AcademicController extends Controller
     /**
      * Authenticate route
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth.routes:user', ['except' => ['index', 'show']]);
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth.routes:api', ['except' => ['index', 'show']]);
+    }
 
     /**
      * Show all academics
