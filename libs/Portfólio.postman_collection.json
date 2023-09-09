@@ -11,158 +11,112 @@
 			"item": [
 				{
 					"name": "login",
-					"item": [
+					"event": [
 						{
-							"name": "admin",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var data = pm.response.json();",
-											"pm.environment.set(\"access_token\", data.access_token);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json();",
+									"pm.environment.set(\"access_token\", data.access_token);"
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"123456\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/admin/login",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"admin",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "user",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var data = pm.response.json();",
-											"pm.environment.set(\"access_token\", data.access_token);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"email\": \"sabordoce@cantina.com\",\n    \"password\": \"123456\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/user/login",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"user",
-										"login"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "client",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var data = pm.response.json();",
-											"pm.environment.set(\"access_token\", data.access_token);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phone\": \"(14) 12345-6789\",\n    \"password\": \"123456\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/client/login",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"client",
-										"login"
-									]
-								}
-							},
-							"response": []
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "logout",
@@ -171,8 +125,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var data = pm.response.json();",
-									"pm.environment.set(\"access_token\", data.access_token);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -203,11 +156,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/logout",
+							"raw": "{{url}}/auth/logout",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"auth",
 								"logout"
 							]
 						}
@@ -256,17 +210,17 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Vinícius",
+									"value": "Admin",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "vinicius@teste.com",
+									"value": "admin@admin.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "123",
+									"value": "123456",
 									"type": "text"
 								}
 							]
@@ -909,7 +863,7 @@
 								},
 								{
 									"key": "type",
-									"value": "web",
+									"value": "mobile",
 									"description": "required | ['design', 'prototype', 'web', 'mobile']",
 									"type": "text",
 									"disabled": true
@@ -945,13 +899,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/portfolio/1",
+							"raw": "{{url}}/portfolio/3",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"portfolio",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -979,13 +933,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/portfolio/2",
+							"raw": "{{url}}/portfolio/10",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"portfolio",
-								"2"
+								"10"
 							]
 						}
 					},
