@@ -17,7 +17,7 @@ class AcademicFactory extends Factory
         return [
             'name' => $this->faker->sentence(3),
             'semester' => $this->faker->unique()->randomElement(Academic::SEMESTER),
-            'image' => $this->faker->imageUrl(640, 480, 'teste', true),
+            'image' => 'images/teste.png',
             'description' => $this->faker->randomHtml(1, 1),
         ];
     }

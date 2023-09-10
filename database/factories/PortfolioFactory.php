@@ -17,7 +17,7 @@ class PortfolioFactory extends Factory
         return [
             'name' => $this->faker->sentence(3),
             'type' => $this->faker->randomElement(Portfolio::TYPE),
-            'image' => $this->faker->imageUrl(640, 480, 'teste', true),
+            'image' => 'image/teste.png',
             'deploy' => $this->faker->url(),
             'github' => $this->faker->url(),
             'figma' => $this->faker->url(),

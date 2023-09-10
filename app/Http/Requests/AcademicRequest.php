@@ -28,7 +28,7 @@ class AcademicRequest extends FormRequest
         return [
             'name' => 'required|min:3|max:50',
             'semester' => 'required|unique:academics',
-            'image' => 'required',
+            'image' => 'required|mimes:png,jpg',
             'description' => 'sometimes',
         ];
     }

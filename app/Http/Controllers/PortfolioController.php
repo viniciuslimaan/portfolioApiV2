@@ -6,6 +6,7 @@ use App\Http\Requests\PortfolioRequest;
 use App\Models\Portfolio;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
@@ -44,7 +45,11 @@ class PortfolioController extends Controller
     public function store(PortfolioRequest $request): JsonResponse
     {
         try {
-            Portfolio::create($request->all());
+            $portfolioData = $request->all();
+
+            $portfolioData['image'] = $portfolioData['image']->store('images', 'public');
+
+            Portfolio::create($portfolioData);
 
             $return = ['data' => ['msg' => 'Portfólio cadastrado com sucesso!']];
             $code = 200;
@@ -85,9 +90,9 @@ class PortfolioController extends Controller
     public function update(Request $request, int $id): JsonResponse
     {
         try {
-            $user = Portfolio::find($id);
+            $portfolioData = Portfolio::find($id);
 
-            $user->update($request->all());
+            $portfolioData->update($request->all());
 
             $return = ['data' => ['msg' => 'Portfólio editado com sucesso!']];
             $code = 200;
@@ -108,7 +113,13 @@ class PortfolioController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            Portfolio::find($id)->delete();
+            $portfolioData = Portfolio::find($id);
+
+            if (Storage::exists($portfolioData->image)) {
+                Storage::delete($portfolioData->image);
+            }
+
+            $portfolioData->delete();
 
             $return = ['data' => ['msg' => 'Portfólio excluído com sucesso!']];
             $code = 200;

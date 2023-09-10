@@ -6,6 +6,7 @@ use App\Http\Requests\AcademicRequest;
 use App\Models\Academic;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AcademicController extends Controller
 {
@@ -28,7 +29,7 @@ class AcademicController extends Controller
             $return = Academic::all();
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao listar todos os projetos academicos!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao listar todos os projetos acadêmicos!', 'error' => $e]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -43,13 +44,18 @@ class AcademicController extends Controller
      */
     public function store(AcademicRequest $request): JsonResponse
     {
+
         try {
-            Academic::create($request->all());
+            $academicData = $request->all();
+
+            $academicData['image'] = $academicData['image']->store('images', 'public');
+
+            Academic::create($academicData);
 
             $return = ['data' => ['msg' => 'Projeto acadêmico cadastrado com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao cadastrar um novo projetos acadêmico!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao cadastrar um novo projeto acadêmico!', 'error' => $e]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -68,7 +74,7 @@ class AcademicController extends Controller
             $return = Academic::find($id);
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao mostrar o projetos acadêmico!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao mostrar o projeto acadêmico!', 'error' => $e]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -85,14 +91,14 @@ class AcademicController extends Controller
     public function update(Request $request, int $id): JsonResponse
     {
         try {
-            $user = Academic::find($id);
+            $academicData = Academic::find($id);
 
-            $user->update($request->all());
+            $academicData->update($request->all());
 
             $return = ['data' => ['msg' => 'Projeto acadêmico editado com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao editar o projetos acadêmico!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao editar o projeto acadêmico!', 'error' => $e]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -108,12 +114,18 @@ class AcademicController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            Academic::find($id)->delete();
+            $academicData = Academic::find($id);
+
+            if (Storage::exists($academicData->image)) {
+                Storage::delete($academicData->image);
+            }
+
+            $academicData->delete();
 
             $return = ['data' => ['msg' => 'Projeto acadêmico excluído com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao excluir o projetos acadêmico!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao excluir o projeto acadêmico!', 'error' => $e]];
             $code = 400;
         } finally {
             return response()->json($return, $code);

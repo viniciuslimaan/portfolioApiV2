@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Portfolio;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -27,8 +28,8 @@ class PortfolioRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50',
-            'type' => 'required|unique:portfolios',
-            'image' => 'required',
+            'type' => 'required|string',
+            'image' => 'required|mimes:png,jpg',
             'deploy' => 'sometimes|max:100',
             'github' => 'sometimes|max:100',
             'figma' => 'sometimes|max:100',
