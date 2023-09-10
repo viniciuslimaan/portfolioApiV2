@@ -82,11 +82,11 @@ class UserController extends Controller
     /**
      * Update a specific user
      *
-     * @param Request $request
+     * @param UserRequest $request
      * @param integer $id
      * @return JsonResponse
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(UserRequest $request, int $id): JsonResponse
     {
         try {
             $userData = $request->all();
@@ -94,6 +94,8 @@ class UserController extends Controller
 
             if ($userData['password']) {
                 $userData['password'] = bcrypt($userData['password']);
+            } else {
+                $userData['password'] = $user->password;
             }
 
             $user->update($userData);
