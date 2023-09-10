@@ -40,6 +40,6 @@ Para utilizar essa aplicação, basta apagar o '.example' do arquivo '.env.examp
 
 ## 🎲 Banco
 
-É necessário a criação de uma tabela com o nome de 'portfolio' no MySql.
+É necessário a criação de uma tabela com o nome de 'portfolio' do tipo "utf8_general_ci" no MySql.
 
 Um modelo do banco de dados do projeto, seja em forma de arquivo ou imagem, está armazenado na pasta 'libs'. É importante observar que este modelo foi criado no início do projeto apenas para fins de planejamento e não tem nenhum efeito prático, uma vez que as tabelas são geradas automaticamente pelo Laravel.
