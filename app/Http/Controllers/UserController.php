@@ -25,10 +25,12 @@ class UserController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $return = User::all();
+            $data = User::all();
+
+            $return = ['data' => $data];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao listar todos os usuários!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao listar todos os usuários!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -53,7 +55,7 @@ class UserController extends Controller
             $return = ['data' => ['msg' => 'Usuário cadastrado com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao cadastrar um novo usuário!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao cadastrar um novo usuário!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -69,10 +71,12 @@ class UserController extends Controller
     public function show(int $id): JsonResponse
     {
         try {
-            $return = User::find($id);
+            $data = User::findOrFail($id);
+
+            $return = ['data' => $data];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao mostrar o cliente!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao mostrar o usuário!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -90,7 +94,7 @@ class UserController extends Controller
     {
         try {
             $userData = $request->all();
-            $user = User::find($id);
+            $user = User::findOrFail($id);
 
             if ($userData['password']) {
                 $userData['password'] = bcrypt($userData['password']);
@@ -103,7 +107,7 @@ class UserController extends Controller
             $return = ['data' => ['msg' => 'Usuário editado com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao editar o usuário!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao editar o usuário!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -119,12 +123,12 @@ class UserController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            User::find($id)->delete();
+            User::findOrFail($id)->delete();
 
             $return = ['data' => ['msg' => 'Usuário excluído com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao excluir o usuário!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao excluir o usuário!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);

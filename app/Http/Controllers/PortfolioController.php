@@ -26,10 +26,12 @@ class PortfolioController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $return = Portfolio::all();
+            $data = Portfolio::all();
+
+            $return = ['data' => $data];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao listar todos os portfólios!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao listar todos os portfólios!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -54,7 +56,7 @@ class PortfolioController extends Controller
             $return = ['data' => ['msg' => 'Portfólio cadastrado com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao cadastrar um novo portfólio!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao cadastrar um novo portfólio!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -70,10 +72,12 @@ class PortfolioController extends Controller
     public function show(int $id): JsonResponse
     {
         try {
-            $return = Portfolio::find($id);
+            $data = Portfolio::findOrFail($id);
+
+            $return = ['data' => $data];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao mostrar o portfólio!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao mostrar o portfólio!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -90,14 +94,14 @@ class PortfolioController extends Controller
     public function update(Request $request, int $id): JsonResponse
     {
         try {
-            $portfolioData = Portfolio::find($id);
+            $portfolioData = Portfolio::findOrFail($id);
 
             $portfolioData->update($request->all());
 
             $return = ['data' => ['msg' => 'Portfólio editado com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao editar o portfólio!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao editar o portfólio!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
@@ -113,7 +117,7 @@ class PortfolioController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            $portfolioData = Portfolio::find($id);
+            $portfolioData = Portfolio::findOrFail($id);
 
             if (Storage::exists($portfolioData->image)) {
                 Storage::delete($portfolioData->image);
@@ -124,7 +128,7 @@ class PortfolioController extends Controller
             $return = ['data' => ['msg' => 'Portfólio excluído com sucesso!']];
             $code = 200;
         } catch (\Exception $e) {
-            $return = ['data' => ['msg' => 'Houve um erro ao excluir o portfólio!', 'error' => $e]];
+            $return = ['data' => ['msg' => 'Houve um erro ao excluir o portfólio!', 'error' => $e->getMessage()]];
             $code = 400;
         } finally {
             return response()->json($return, $code);
