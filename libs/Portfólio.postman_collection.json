@@ -211,16 +211,19 @@
 								{
 									"key": "name",
 									"value": "Admin",
+									"description": "required | min:3 | max:50",
 									"type": "text"
 								},
 								{
 									"key": "email",
 									"value": "admin@admin.com",
+									"description": "required | email | unique | min:5 | max:50",
 									"type": "text"
 								},
 								{
 									"key": "password",
 									"value": "123456",
+									"description": "required | min:6",
 									"type": "text"
 								}
 							]
@@ -334,30 +337,31 @@
 								{
 									"key": "name",
 									"value": "Vinicius",
-									"type": "text",
-									"disabled": true
+									"description": "required | min:3 | max:50",
+									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "vinicius@aaa.com",
-									"type": "text",
-									"disabled": true
+									"value": "admin@admin.com",
+									"description": "required | email | unique | min:5 | max:50",
+									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "123456",
+									"value": "",
+									"description": "nullable | min:6",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/user/1",
+							"raw": "{{url}}/user/4",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"user",
-								"1"
+								"4"
 							]
 						}
 					},
@@ -385,13 +389,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/user/1",
+							"raw": "{{url}}/user/3",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"user",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -435,13 +439,13 @@
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "name",
 									"value": "SOSCantinas",
 									"description": "required | min:3 | max:50",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "semester",
@@ -451,9 +455,9 @@
 								},
 								{
 									"key": "image",
-									"value": "https://www.placemonkeys.com/500/350",
-									"description": "required",
-									"type": "text"
+									"description": "required | mimes:png,jpg",
+									"type": "file",
+									"src": "/C:/Users/vinic/Desktop/teste.png"
 								},
 								{
 									"key": "description",
@@ -580,34 +584,31 @@
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "name",
 									"value": "SOSCantinas",
 									"description": "required | min:3 | max:50",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "semester",
-									"value": "one",
+									"value": "three",
 									"description": "required | ['one', 'two', 'three', 'four', 'five', 'six']",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "image",
-									"value": "https://www.placemonkeys.com/500/350",
-									"description": "required",
-									"type": "text",
-									"disabled": true
+									"description": "required | mimes:png,jpg",
+									"type": "file",
+									"src": "/C:/Users/vinic/Desktop/teste.png"
 								},
 								{
 									"key": "description",
 									"value": "Um texto bem legal aqui",
 									"description": "sometimes",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								}
 							]
 						},
@@ -696,13 +697,13 @@
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "name",
 									"value": "SOSCantinas",
 									"description": "required | min:3 | max:50",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "type",
@@ -712,9 +713,9 @@
 								},
 								{
 									"key": "image",
-									"value": "https://www.placemonkeys.com/500/350",
-									"description": "required",
-									"type": "text"
+									"description": "required | mimes:png,jpg",
+									"type": "file",
+									"src": "/C:/Users/vinic/Desktop/teste.png"
 								},
 								{
 									"key": "deploy",
@@ -853,59 +854,54 @@
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
 									"key": "name",
 									"value": "SOSCantinas",
 									"description": "required | min:3 | max:50",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "type",
-									"value": "mobile",
+									"value": "web",
 									"description": "required | ['design', 'prototype', 'web', 'mobile']",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "image",
-									"value": "https://www.placemonkeys.com/500/350",
-									"description": "required",
-									"type": "text",
-									"disabled": true
+									"description": "required | mimes:png,jpg",
+									"type": "file",
+									"src": "/C:/Users/vinic/Desktop/teste.png"
 								},
 								{
 									"key": "deploy",
 									"value": "https://www.viniciuslimaan.com/soscantinas",
 									"description": "sometimes | max:100",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "giuthub",
 									"value": "https://www.github.com/viniciuslimaan/soscantinas",
 									"description": "sometimes | max:100",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "figma",
 									"value": "https://www.figma.com/viniciuslimaan/soscantinas",
 									"description": "sometimes | max:100",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/portfolio/3",
+							"raw": "{{url}}/portfolio/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"portfolio",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -933,13 +929,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/portfolio/10",
+							"raw": "{{url}}/portfolio/13",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"portfolio",
-								"10"
+								"13"
 							]
 						}
 					},
