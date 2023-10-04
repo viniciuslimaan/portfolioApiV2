@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -25,7 +25,9 @@ class UserController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $data = User::all();
+            $data = DB::table('users')
+                ->orderBy('created_at', 'desc')
+                ->get();
 
             $return = ['data' => $data];
             $code = 200;
