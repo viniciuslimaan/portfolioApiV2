@@ -34,6 +34,8 @@ Obs: é necessário a configuração do .env e a criação de uma tabela chamada
 
 Para utilizar essa aplicação, basta apagar o '.example' do arquivo '.env.example' podendo tanto deixar como está, quanto editando de acordo com sua necessidade.
 
+Para as imagens upadas serem exibidas corretamente, altere o **APP_URL** do .env de acordo com a url do projeto.
+
 ## 📄 Postman
 
 É possível testar o projeto sem ter o FrontEnd, basta usar o [Postman](https://www.postman.com). Os arquivos para importação (collection e environment) estão localizados na pasta 'libs'.

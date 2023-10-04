@@ -6,6 +6,7 @@ use App\Http\Requests\AcademicRequest;
 use App\Models\Academic;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AcademicController extends Controller
@@ -26,9 +27,17 @@ class AcademicController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $data = Academic::all();
+            $data = DB::table('academics')
+                ->orderByRaw("FIELD(semester, 'one', 'two', 'three', 'four', 'five', 'six')")
+                ->get();
 
-            $return = ['data' => $data];
+            $newData = $data->map(function ($item) {
+                $item = (array) $item;
+                $item['image_url'] = Storage::url($item['image']);
+                return $item;
+            });
+
+            $return = ['data' => $newData];
             $code = 200;
         } catch (\Exception $e) {
             $return = ['data' => ['msg' => 'Houve um erro ao listar todos os projetos acadêmicos!', 'error' => $e->getMessage()]];
@@ -74,6 +83,8 @@ class AcademicController extends Controller
     {
         try {
             $data = Academic::findOrFail($id);
+
+            $data['image_url'] = Storage::url($data['image']);
 
             $return = ['data' => $data];
             $code = 200;

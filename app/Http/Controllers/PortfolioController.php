@@ -6,6 +6,7 @@ use App\Http\Requests\PortfolioRequest;
 use App\Models\Portfolio;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
@@ -26,9 +27,18 @@ class PortfolioController extends Controller
     public function index(): JsonResponse
     {
         try {
-            $data = Portfolio::all();
+            $data = DB::table('portfolios')
+                ->orderByRaw("FIELD(type, 'design', 'prototype', 'web', 'mobile')")
+                ->orderBy('name')
+                ->get();
 
-            $return = ['data' => $data];
+            $newData = $data->map(function ($item) {
+                $item = (array) $item;
+                $item['image_url'] = Storage::url($item['image']);
+                return $item;
+            });
+
+            $return = ['data' => $newData];
             $code = 200;
         } catch (\Exception $e) {
             $return = ['data' => ['msg' => 'Houve um erro ao listar todos os portfólios!', 'error' => $e->getMessage()]];
@@ -74,6 +84,8 @@ class PortfolioController extends Controller
         try {
             $data = Portfolio::findOrFail($id);
 
+            $data['image_url'] = Storage::url($data['image']);
+            
             $return = ['data' => $data];
             $code = 200;
         } catch (\Exception $e) {
