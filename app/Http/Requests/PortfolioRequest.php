@@ -26,7 +26,7 @@ class PortfolioRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|min:3|max:50',
             'type' => 'required|string',
             'image' => 'required|mimes:png,jpg',
@@ -34,6 +34,19 @@ class PortfolioRequest extends FormRequest
             'github' => 'sometimes|max:100',
             'figma' => 'sometimes|max:100',
         ];
+
+        if ($this->method() === 'PUT') {
+            $rules = [
+                'name' => 'required|min:3|max:50',
+                'type' => 'required|string',
+                'image' => 'sometimes|mimes:png,jpg',
+                'deploy' => 'sometimes|max:100',
+                'github' => 'sometimes|max:100',
+                'figma' => 'sometimes|max:100',
+            ];
+        }
+
+        return $rules;
     }
 
     /**

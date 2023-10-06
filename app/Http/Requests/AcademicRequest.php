@@ -25,12 +25,23 @@ class AcademicRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|min:3|max:50',
             'semester' => 'required|unique:academics',
             'image' => 'required|mimes:png,jpg',
             'description' => 'sometimes',
         ];
+
+        if ($this->method() === 'PUT') {
+            $rules = [
+                'name' => 'required|min:3|max:50',
+                'semester' => 'required|unique:academics,semester,'.$this->id,
+                'image' => 'sometimes|mimes:png,jpg',
+                'description' => 'sometimes',
+            ];
+        }
+
+        return $rules;
     }
 
     /**

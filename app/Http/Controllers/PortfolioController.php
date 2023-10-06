@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PortfolioRequest;
 use App\Models\Portfolio;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -99,16 +98,22 @@ class PortfolioController extends Controller
     /**
      * Update a specific portfolio
      *
-     * @param Request $request
+     * @param PortfolioRequest $request
      * @param integer $id
      * @return JsonResponse
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(PortfolioRequest $request, int $id): JsonResponse
     {
         try {
+            $newPortfolioData = $request->all();
             $portfolioData = Portfolio::findOrFail($id);
 
-            $portfolioData->update($request->all());
+            if (isset($newPortfolioData['image'])) {
+                Storage::delete($portfolioData->image);
+                $newPortfolioData['image'] = $newPortfolioData['image']->store('images', 'public');
+            }
+
+            $portfolioData->update($newPortfolioData);
 
             $return = ['data' => ['msg' => 'Portfólio editado com sucesso!']];
             $code = 200;

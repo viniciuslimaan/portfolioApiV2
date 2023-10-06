@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AcademicRequest;
 use App\Models\Academic;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -99,16 +98,22 @@ class AcademicController extends Controller
     /**
      * Update a specific academic
      *
-     * @param Request $request
+     * @param AcademicRequest $request
      * @param integer $id
      * @return JsonResponse
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(AcademicRequest $request, int $id): JsonResponse
     {
         try {
+            $newAcademicData = $request->all();
             $academicData = Academic::findOrFail($id);
 
-            $academicData->update($request->all());
+            if (isset($newAcademicData['image'])) {
+                Storage::delete($academicData->image);
+                $newAcademicData['image'] = $newAcademicData['image']->store('images', 'public');
+            }
+
+            $academicData->update($newAcademicData);
 
             $return = ['data' => ['msg' => 'Projeto acadêmico editado com sucesso!']];
             $code = 200;
