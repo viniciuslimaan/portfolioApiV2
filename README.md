@@ -28,6 +28,12 @@ php artisan jwt:secret
 php artisan serve
 ```
 
+Para que as imagens não quebrem, será necessário refazer o link do storage, para isso use:
+
+```
+php artisan storage:link
+```
+
 Obs: é necessário a configuração do .env e a criação de uma tabela chamada 'portfolio' antes de executar os comandos php.
 
 ## ⚙️ Variáveis de ambiente
