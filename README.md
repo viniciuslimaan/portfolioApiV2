@@ -19,9 +19,9 @@ cd portfolioApiV2
 
 composer i
 
-php artisan make:migrate
+php artisan migrate
 --> ou caso queira dados fake execute:
-php artisan make:migrate --seed
+php artisan migrate --seed
 
 php artisan jwt:secret
 
